@@ -17,6 +17,9 @@ class HomeViewController: UIViewController {
         case top_rated = "Top rated"
     }
     
+    // MARK: - ViewModel
+    var viewModel = HomeTableCellViewModel()
+        
     // MARK: - Views
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -75,6 +78,30 @@ extension HomeViewController: UITableViewDataSource & UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as! HomeTableViewCell
+        
+        switch SectionTitle.allCases[indexPath.section] {
+     
+        case .trending_movie:
+            viewModel.fetchTrendingMovies { titles in
+                cell.configure(with: titles)
+            }
+        case .trending_tv:
+            viewModel.fetchTrendingTV { titles in
+                cell.configure(with: titles)
+            }
+        case .popular:
+            viewModel.fetchPopular { titles in
+                cell.configure(with: titles)
+            }
+        case .upcoming_movie:
+            viewModel.fetchUpcomingMovies { titles in
+                cell.configure(with: titles)
+            }
+        case .top_rated:
+            viewModel.fetchTopRated { titles in
+                cell.configure(with: titles)
+            }
+        }
         return cell
     }
 }
@@ -99,6 +126,7 @@ extension HomeViewController {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }
         headerView.textLabel?.font = UIFont.systemFont(ofSize: 18)
         headerView.textLabel?.textColor = .white
+        headerView.textLabel?.text = headerView.textLabel?.text?.capitalized
     }
 }
 
@@ -108,6 +136,5 @@ extension HomeViewController {
         let defultOffset = view.safeAreaInsets.top
         let offest = scrollView.contentOffset.y + defultOffset
         navigationController?.navigationBar.transform = CGAffineTransform(translationX: 0, y: min(0, -offest))
-        
     }
 }

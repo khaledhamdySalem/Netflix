@@ -11,13 +11,15 @@ class HomeTableViewCell: UITableViewCell {
     
     static let identifier = "HomeTableViewCell"
     
+    var titles: [Title] = [Title]()
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = .init(width: 140, height: 200)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: TitleCollectionViewCell.identifier)
         return collectionView
     }()
     
@@ -42,10 +44,14 @@ class HomeTableViewCell: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
     }
     
-    func configure(viewModel: HomeTableCellViewModel) {
-        
+    public func configure(with titles: [Title]) {
+        self.titles = titles
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -56,12 +62,15 @@ class HomeTableViewCell: UITableViewCell {
 
 extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        titles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .green
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as! TitleCollectionViewCell
+        
+        let viewModel = TitleCollectionViewCellViewModel(image: titles[indexPath.item].poster_path ?? "")
+        
+        cell.configure(viewModel: viewModel)
         return cell
     }
 }

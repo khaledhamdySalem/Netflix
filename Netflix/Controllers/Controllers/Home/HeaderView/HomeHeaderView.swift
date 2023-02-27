@@ -68,7 +68,7 @@ class HomeHeaderView: UIView {
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = .clear
-        button.tintColor = .label
+        button.tintColor = .white
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         return button
     }
