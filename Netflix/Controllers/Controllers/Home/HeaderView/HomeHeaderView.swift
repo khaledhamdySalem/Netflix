@@ -9,12 +9,12 @@ import UIKit
 
 class HomeHeaderView: UIView {
     
-    private let imageView: UIImageView = {
+     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "film")
+        imageView.image = UIImage(named: "")
         return imageView
     }()
     
@@ -71,6 +71,11 @@ class HomeHeaderView: UIView {
         button.tintColor = .white
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         return button
+    }
+    
+    public func configure(imagePath: String) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(imagePath)") else { return }
+        imageView.sd_setImage(with: url)
     }
     
     required init?(coder: NSCoder) {

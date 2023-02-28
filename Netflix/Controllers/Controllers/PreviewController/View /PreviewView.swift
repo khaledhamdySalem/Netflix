@@ -59,9 +59,9 @@ final class PreviewView: UIView {
         configureView()
         addConstraints()
     }
-    
+        
     public func configure(with items: [VideoElement]) {
-        guard let url = URL(string: "https://www.youtube.com/embed/\(items[0].id?.videoId ?? "")") else { return }
+        guard let url = URL(string: "https://www.youtube.com/embed/\(items.first?.id?.videoId ?? "")") else { return }
         titleLabel.text = viewModel.displayTitle
         webView.load(URLRequest(url: url))
         overviewLabel.text = viewModel.displayOverView

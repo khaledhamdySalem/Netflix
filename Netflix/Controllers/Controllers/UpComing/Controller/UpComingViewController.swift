@@ -93,9 +93,16 @@ extension UpComingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+       
+        let viewModel = PreviewViewViewModel(title: viewModel.titles?[indexPath.row].original_title ?? "",
+                                             overview: viewModel.titles?[indexPath.row].overview ?? "",
+                                             viedoUrl: URL(string: viewModel.titles?[indexPath.row].poster_path ?? ""))
+        let vc = PreviewViewController(viewModel: viewModel)
+        present(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+    
 }

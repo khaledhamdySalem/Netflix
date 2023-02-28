@@ -8,9 +8,16 @@
 import Foundation
 
 final class PreviewViewViewModel {
-     private let title: String
-     private let overview: String
-     var viedoUrl: URL?
+    
+    let title: String
+    let overview: String
+    var viedoUrl: URL?
+    
+    init(title: String, overview: String, viedoUrl: URL? = nil) {
+        self.title = title
+        self.overview = overview
+        self.viedoUrl = viedoUrl
+    }
     
     public var displayTitle: String {
         return title
@@ -18,12 +25,6 @@ final class PreviewViewViewModel {
     
     public var displayOverView: String {
         return overview
-    }
-    
-    init(title: String, overview: String, viedoUrl: URL?) {
-        self.title = title
-        self.overview = overview
-        self.viedoUrl = viedoUrl
     }
     
     public func fetchVideo(complition: @escaping (Result<[VideoElement], Error>) -> Void) {

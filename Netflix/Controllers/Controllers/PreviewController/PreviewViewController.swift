@@ -40,7 +40,7 @@ class PreviewViewController: UIViewController {
     }
     
     private func fetchData() {
-        viewModel.fetchVideo { [weak self] result in
+        viewModel.fetchVideo() { [weak self] result in
             switch result {
             case .success(let items):
                 DispatchQueue.main.async {

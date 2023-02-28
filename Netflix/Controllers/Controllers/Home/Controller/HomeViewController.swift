@@ -8,6 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
     enum SectionTitle: String, CaseIterable {
         case trending_movie = "Trending Movies"
         case trending_tv = "Trending Tv"
@@ -18,6 +19,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - ViewModel
     var viewModel = HomeTableCellViewModel()
+    var titles = [Title]()
     
     // MARK: - Views
     let tableView: UITableView = {
@@ -27,6 +29,9 @@ class HomeViewController: UIViewController {
         return tableView
     }()
     
+    fileprivate var headerView: HomeHeaderView?
+    fileprivate var randowmTitle: Title?
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +39,7 @@ class HomeViewController: UIViewController {
         addConstraints()
         configureNavigationBar()
         createHeaderView()
+        configureHeaderView()
     }
     
     private func configureView() {
@@ -59,6 +65,18 @@ class HomeViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = .white
     }
+    
+    private func configureHeaderView() {
+        NetworkService.shared.getTrendingMovies { [weak self] result in
+            switch result {
+            case .success(let res):
+                self?.randowmTitle = res.results.randomElement()
+                self?.headerView?.configure(imagePath: self?.randowmTitle?.poster_path ?? "")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 // MARK: - Datasource & Delegate
@@ -77,14 +95,13 @@ extension HomeViewController: UITableViewDataSource & UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as! HomeTableViewCell
-        
         cell.delegate = self
-        
+       
         switch SectionTitle.allCases[indexPath.section] {
-            
         case .trending_movie:
             viewModel.fetchTrendingMovies { titles in
                 cell.configure(with: titles)
+                self.titles = titles
             }
         case .trending_tv:
             viewModel.fetchTrendingTV { titles in
@@ -112,6 +129,7 @@ extension HomeViewController {
     
     private func createHeaderView() {
         let homeHeaderView = HomeHeaderView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 450))
+        self.headerView = homeHeaderView
         tableView.tableHeaderView = homeHeaderView
     }
     
