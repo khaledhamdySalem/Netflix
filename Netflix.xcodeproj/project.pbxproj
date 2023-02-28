@@ -33,6 +33,7 @@
 		EA15FBAE29ACBDD300677B12 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBAD29ACBDD300677B12 /* PreviewViewController.swift */; };
 		EA7939D329ADEFB000C0D787 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7939D229ADEFB000C0D787 /* PreviewView.swift */; };
 		EA7939D529ADF13D00C0D787 /* PreviewViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7939D429ADF13D00C0D787 /* PreviewViewViewModel.swift */; };
+		EA7939D729AE901300C0D787 /* DataBasePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7939D629AE901300C0D787 /* DataBasePersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		EA15FBAD29ACBDD300677B12 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		EA7939D229ADEFB000C0D787 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		EA7939D429ADF13D00C0D787 /* PreviewViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewViewModel.swift; sourceTree = "<group>"; };
+		EA7939D629AE901300C0D787 /* DataBasePersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBasePersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				EA15FB9129ABB78800677B12 /* NetworkService.swift */,
+				EA7939D629AE901300C0D787 /* DataBasePersistenceManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				EA15FB9729ABCCE800677B12 /* TitleCollectionViewCell.swift in Sources */,
 				EA15FB9029ABA26D00677B12 /* HomeHeaderView.swift in Sources */,
 				EA15FB8D29AB9CFC00677B12 /* HomeTableCellViewModel.swift in Sources */,
+				EA7939D729AE901300C0D787 /* DataBasePersistenceManager.swift in Sources */,
 				EA15FB8829AB9C2000677B12 /* HomeTableViewCell.swift in Sources */,
 				EA15FB7D29AB984100677B12 /* UpComingViewController.swift in Sources */,
 				EA15FB9229ABB78800677B12 /* NetworkService.swift in Sources */,

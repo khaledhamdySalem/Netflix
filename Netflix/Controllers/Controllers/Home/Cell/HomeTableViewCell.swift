@@ -59,6 +59,17 @@ class HomeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func downloadTitleAt(indexPath: IndexPath) {
+        DataBasePersistenceManager.shared.downloadTitleWith(model: titles[indexPath.item]) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(name: Notification.Name("downloadObject"), object: nil)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }
 
 extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -79,6 +90,20 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
         collectionView.deselectItem(at: indexPath, animated: true)
         guard let title = titles[indexPath.item].original_title ?? titles[indexPath.item].original_name else { return }
         delegate?.didopenVideo(with: title, titleOverview: titles[indexPath.item].overview ?? "")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let config = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil) {[weak self] _ in
+                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                    self?.downloadTitleAt(indexPath: indexPath)
+                }
+                return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+            }
+        
+        return config
     }
 }
 
