@@ -10,6 +10,8 @@ import Foundation
 struct Constants {
     static let API_KEY = "a6a529e2200060ce5635a0b144329c2e"
     static let base_url = "https://api.themoviedb.org"
+    static let YoutubeAPI_KEY = "AIzaSyDqX8axTGeNpXRiISTGL7Tya7fjKJDYi4g"
+    static let YoutubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
 final class NetworkService {
@@ -42,7 +44,6 @@ final class NetworkService {
         }.resume()
     }
     
-    
     public func getTrendingMovies(complition: @escaping ((Result<TrendingTitleResponse, Error>) -> Void)) {
         let urlString = "\(Constants.base_url)/3/trending/movie/day?api_key=\(Constants.API_KEY)"
         getTrendingGeneric(urlString: urlString, complition: complition)
@@ -73,62 +74,15 @@ final class NetworkService {
         getTrendingGeneric(urlString: urlString, complition: complition)
     }
     
+    func search(with query: String, completion: @escaping (Result<TrendingTitleResponse, Error>) -> Void) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        let urlString = "\(Constants.base_url)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)"
+        getTrendingGeneric(urlString: urlString, complition: completion)
+    }
+    
+    func getMovie(with query: String, completion: @escaping (Result<YoutubeSearchResponse, Error>) -> Void) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        let urlString = "\(Constants.YoutubeBaseURL)q=\(query)&key=\(Constants.YoutubeAPI_KEY)"
+        getTrendingGeneric(urlString: urlString, complition: completion)
+    }
 }
-
-//func search(with query: String, completion: @escaping (Result<[Title], Error>) -> Void) {
-//
-//    guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
-//    guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else {
-//        return
-//    }
-//
-//    let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-//        guard let data = data, error == nil else {
-//            return
-//        }
-//
-//        do {
-//            let results = try JSONDecoder().decode(TrendingTitleResponse.self, from: data)
-//            completion(.success(results.results))
-//
-//        } catch {
-//            completion(.failure(APIError.failedTogetData))
-//        }
-//
-//    }
-//    task.resume()
-//}
-//
-//
-//func getMovie(with query: String, completion: @escaping (Result<VideoElement, Error>) -> Void) {
-//
-//
-//    guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
-//    guard let url = URL(string: "\(Constants.YoutubeBaseURL)q=\(query)&key=\(Constants.YoutubeAPI_KEY)") else {return}
-//    let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-//        guard let data = data, error == nil else {
-//            return
-//        }
-//
-//        do {
-//            let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
-//
-//            completion(.success(results.items[0]))
-//            
-//
-//        } catch {
-//            completion(.failure(error))
-//            print(error.localizedDescription)
-//        }
-//
-//    }
-//    task.resume()
-//}
-//
-//}
-//
-//
-//
-//
-//
-//

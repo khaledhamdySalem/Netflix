@@ -12,6 +12,7 @@ class HomeTableViewCell: UITableViewCell {
     static let identifier = "HomeTableViewCell"
     
     var titles: [Title] = [Title]()
+    weak var delegate: HomeTableViewCellDelegate?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -73,4 +74,15 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
         cell.configure(viewModel: viewModel)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard let title = titles[indexPath.item].original_title ?? titles[indexPath.item].original_name else { return }
+        delegate?.didopenVideo(with: title, titleOverview: titles[indexPath.item].overview ?? "")
+    }
+}
+
+
+protocol HomeTableViewCellDelegate: AnyObject {
+    func didopenVideo(with videoTitle: String, titleOverview: String)
 }

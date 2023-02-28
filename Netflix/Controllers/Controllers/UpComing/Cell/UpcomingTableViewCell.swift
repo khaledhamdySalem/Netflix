@@ -14,7 +14,7 @@ class UpcomingTableViewCell: UITableViewCell {
     private let playButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "play.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
+        button.setImage(UIImage(systemName: "play.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -33,6 +33,7 @@ class UpcomingTableViewCell: UITableViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .systemBackground
         image.contentMode = .scaleToFill
+        image.layer.cornerRadius = 8
         image.clipsToBounds = true
         return image
     }()
@@ -49,9 +50,9 @@ class UpcomingTableViewCell: UITableViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             posterImageView.widthAnchor.constraint(equalToConstant: 150),
             
             playButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),

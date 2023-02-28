@@ -28,6 +28,11 @@
 		EA15FBA329AC91E800677B12 /* UpComingViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBA229AC91E800677B12 /* UpComingViewViewModel.swift */; };
 		EA15FBA529AC977F00677B12 /* UpcomingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBA429AC977F00677B12 /* UpcomingTableViewCell.swift */; };
 		EA15FBA729AC97CA00677B12 /* UpcomingTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBA629AC97CA00677B12 /* UpcomingTableViewCellViewModel.swift */; };
+		EA15FBA929ACA8C100677B12 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBA829ACA8C100677B12 /* SearchResultViewController.swift */; };
+		EA15FBAB29ACAFBB00677B12 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBAA29ACAFBB00677B12 /* YoutubeSearchResponse.swift */; };
+		EA15FBAE29ACBDD300677B12 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15FBAD29ACBDD300677B12 /* PreviewViewController.swift */; };
+		EA7939D329ADEFB000C0D787 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7939D229ADEFB000C0D787 /* PreviewView.swift */; };
+		EA7939D529ADF13D00C0D787 /* PreviewViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7939D429ADF13D00C0D787 /* PreviewViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,11 @@
 		EA15FBA229AC91E800677B12 /* UpComingViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingViewViewModel.swift; sourceTree = "<group>"; };
 		EA15FBA429AC977F00677B12 /* UpcomingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTableViewCell.swift; sourceTree = "<group>"; };
 		EA15FBA629AC97CA00677B12 /* UpcomingTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		EA15FBA829ACA8C100677B12 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		EA15FBAA29ACAFBB00677B12 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		EA15FBAD29ACBDD300677B12 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		EA7939D229ADEFB000C0D787 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		EA7939D429ADF13D00C0D787 /* PreviewViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +161,7 @@
 		EA15FB7929AB97FB00677B12 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EA15FBAC29ACBDC600677B12 /* PreviewController */,
 				EA15FB8229AB9BF200677B12 /* Home */,
 				EA15FB8929AB9C2E00677B12 /* UpComing */,
 				EA15FB8A29AB9C3700677B12 /* Search */,
@@ -202,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				EA15FB7E29AB985700677B12 /* SearchViewController.swift */,
+				EA15FBA829ACA8C100677B12 /* SearchResultViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -225,6 +237,7 @@
 		EA15FB9329ABC0D400677B12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EA15FBAA29ACAFBB00677B12 /* YoutubeSearchResponse.swift */,
 				EA15FB9429ABC0EB00677B12 /* TrendingMoviesResponse.swift */,
 			);
 			path = Model;
@@ -253,6 +266,32 @@
 				EA15FBA629AC97CA00677B12 /* UpcomingTableViewCellViewModel.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		EA15FBAC29ACBDC600677B12 /* PreviewController */ = {
+			isa = PBXGroup;
+			children = (
+				EA15FBAD29ACBDD300677B12 /* PreviewViewController.swift */,
+				EA7939D129ADEF7200C0D787 /* ViewModel */,
+				EA7939D029ADEF6E00C0D787 /* View  */,
+			);
+			path = PreviewController;
+			sourceTree = "<group>";
+		};
+		EA7939D029ADEF6E00C0D787 /* View  */ = {
+			isa = PBXGroup;
+			children = (
+				EA7939D229ADEFB000C0D787 /* PreviewView.swift */,
+			);
+			path = "View ";
+			sourceTree = "<group>";
+		};
+		EA7939D129ADEF7200C0D787 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EA7939D429ADF13D00C0D787 /* PreviewViewViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,12 +372,16 @@
 			files = (
 				EA15FB9529ABC0EB00677B12 /* TrendingMoviesResponse.swift in Sources */,
 				EA15FB7B29AB982D00677B12 /* HomeViewController.swift in Sources */,
+				EA15FBAE29ACBDD300677B12 /* PreviewViewController.swift in Sources */,
+				EA7939D329ADEFB000C0D787 /* PreviewView.swift in Sources */,
 				EA15FB7F29AB985700677B12 /* SearchViewController.swift in Sources */,
 				EA15FB8129AB986400677B12 /* DownloadsViewController.swift in Sources */,
 				EA15FBA529AC977F00677B12 /* UpcomingTableViewCell.swift in Sources */,
 				EA15FB6129AB8C2700677B12 /* NetflixTabBarController.swift in Sources */,
 				EA15FB9929ABCD1F00677B12 /* TitleCollectionViewCellViewModel.swift in Sources */,
 				EA15FB5D29AB8C2700677B12 /* AppDelegate.swift in Sources */,
+				EA7939D529ADF13D00C0D787 /* PreviewViewViewModel.swift in Sources */,
+				EA15FBAB29ACAFBB00677B12 /* YoutubeSearchResponse.swift in Sources */,
 				EA15FB6729AB8C2700677B12 /* Netflix.xcdatamodeld in Sources */,
 				EA15FB9729ABCCE800677B12 /* TitleCollectionViewCell.swift in Sources */,
 				EA15FB9029ABA26D00677B12 /* HomeHeaderView.swift in Sources */,
@@ -348,6 +391,7 @@
 				EA15FB9229ABB78800677B12 /* NetworkService.swift in Sources */,
 				EA15FB5F29AB8C2700677B12 /* SceneDelegate.swift in Sources */,
 				EA15FBA729AC97CA00677B12 /* UpcomingTableViewCellViewModel.swift in Sources */,
+				EA15FBA929ACA8C100677B12 /* SearchResultViewController.swift in Sources */,
 				EA15FBA329AC91E800677B12 /* UpComingViewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

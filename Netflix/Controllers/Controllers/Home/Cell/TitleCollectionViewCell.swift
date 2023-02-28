@@ -16,6 +16,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -40,7 +41,8 @@ class TitleCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(viewModel: TitleCollectionViewCellViewModel) {
-        posterImageView.sd_setImage(with: viewModel.imageUrl)
+        posterImageView.sd_setImage(with: viewModel.imageUrl,
+                                    placeholderImage: #imageLiteral(resourceName: "placeholder.png"))
     }
     
     required init?(coder: NSCoder) {

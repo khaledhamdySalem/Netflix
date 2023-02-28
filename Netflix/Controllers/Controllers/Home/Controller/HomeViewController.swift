@@ -8,7 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
     enum SectionTitle: String, CaseIterable {
         case trending_movie = "Trending Movies"
         case trending_tv = "Trending Tv"
@@ -19,7 +18,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - ViewModel
     var viewModel = HomeTableCellViewModel()
-        
+    
     // MARK: - Views
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -79,8 +78,10 @@ extension HomeViewController: UITableViewDataSource & UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as! HomeTableViewCell
         
+        cell.delegate = self
+        
         switch SectionTitle.allCases[indexPath.section] {
-     
+            
         case .trending_movie:
             viewModel.fetchTrendingMovies { titles in
                 cell.configure(with: titles)
@@ -136,5 +137,13 @@ extension HomeViewController {
         let defultOffset = view.safeAreaInsets.top
         let offest = scrollView.contentOffset.y + defultOffset
         navigationController?.navigationBar.transform = CGAffineTransform(translationX: 0, y: min(0, -offest))
+    }
+}
+
+extension HomeViewController: HomeTableViewCellDelegate {
+    func didopenVideo(with videoTitle: String, titleOverview: String) {
+        let viewModel = PreviewViewViewModel(title: videoTitle, overview: titleOverview, viedoUrl: nil)
+        let vc = PreviewViewController(viewModel: viewModel)
+        present(vc, animated: true)
     }
 }

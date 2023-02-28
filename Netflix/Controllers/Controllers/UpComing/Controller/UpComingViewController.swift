@@ -12,7 +12,6 @@ class UpComingViewController: UIViewController {
     
     var viewModel = UpComingViewViewModel()
     private var token: Set<AnyCancellable> = []
-    var titles: [Title] = [Title]()
     
     let activityIndicator: UIActivityIndicatorView = {
         let ac = UIActivityIndicatorView()
@@ -43,7 +42,6 @@ class UpComingViewController: UIViewController {
     
     private func setBinders() {
         viewModel.$titles.sink { [weak self] titles in
-            self?.titles = titles ?? []
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -82,12 +80,12 @@ extension UpComingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titles.count
+        return viewModel.titles?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingTableViewCell.identifier, for: indexPath) as! UpcomingTableViewCell
-        guard let titleName = titles[indexPath.row].original_title, let posterName = titles[indexPath.row].poster_path else { return UITableViewCell()}
+        guard let titleName = viewModel.titles?[indexPath.row].original_title, let posterName = viewModel.titles?[indexPath.row].poster_path else { return UITableViewCell()}
         let viewModel = UpcomingTableViewCellViewModel(titleName: titleName, posterImage: posterName)
         cell.configure(with: viewModel)
         return cell
