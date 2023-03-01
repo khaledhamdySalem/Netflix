@@ -22,9 +22,11 @@ class DownloadsViewController: UIViewController {
         configureView()
         addConstraints()
         fetchDataFromDB()
-        
+        observable()
+    }
+    
+    private func observable() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleObserver), name: Notification.Name("downloadObject"), object: nil)
-        
     }
     
     @objc func handleObserver() {
